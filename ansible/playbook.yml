@@ -25,5 +25,6 @@
         name: webvm
         image: acrcp2denisse.azurecr.io/webvm:casopractico2
         state: started
-        ports:
-          - "80:80"
+        publish:
+          - "8080:80"
+        recreate: true
