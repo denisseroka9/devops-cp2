@@ -1,0 +1,9 @@
+---
+- name: Create namespace for Kubernetes application
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: web-k8s

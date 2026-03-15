@@ -2,6 +2,8 @@
 - name: Configure VM and deploy container
   hosts: vm
   become: true
+  vars_files:
+    - secrets.yml
 
   tasks:
 
@@ -28,3 +30,14 @@
         publish:
           - "8080:80"
         recreate: true
+
+- name: Deploy application to AKS
+  hosts: localhost
+  connection: local
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Create Kubernetes namespace
+      include_role:
+        name: aks
