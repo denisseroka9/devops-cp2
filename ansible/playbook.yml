@@ -1,9 +1,29 @@
 ---
-- name: Test connectivity with VM
+- name: Configure VM and deploy container
   hosts: vm
   become: true
 
   tasks:
 
-    - name: Ping remote host
-      ansible.builtin.ping:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Podman
+      ansible.builtin.apt:
+        name: podman
+        state: present
+
+    - name: Login to Azure Container Registry
+      containers.podman.podman_login:
+        registry: acrcp2denisse.azurecr.io
+        username: acrcp2denisse
+        password: "{{ acr_password }}"
+
+    - name: Run nginx container
+      containers.podman.podman_container:
+        name: webvm
+        image: acrcp2denisse.azurecr.io/webvm:casopractico2
+        state: started
+        ports:
+          - "80:80"
