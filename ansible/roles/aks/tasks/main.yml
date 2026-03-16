@@ -7,3 +7,8 @@
       kind: Namespace
       metadata:
         name: web-k8s
+
+- name: Deploy application in AKS
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'deployment.yml.j2') }}"
