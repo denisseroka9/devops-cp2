@@ -18,3 +18,10 @@ spec:
         image: acrcp2denisse.azurecr.io/webk8s:casopractico2
         ports:
         - containerPort: 6379
+        volumeMounts:
+        - mountPath: /data
+          name: redis-storage
+      volumes:
+      - name: redis-storage
+        persistentVolumeClaim:
+          claimName: webk8s-pvc
