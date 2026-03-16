@@ -16,11 +16,11 @@
         name: podman
         state: present
 
-    - name: Login to Azure Container Registry
-      containers.podman.podman_login:
-        registry: acrcp2denisse.azurecr.io
-        username: acrcp2denisse
-        password: "{{ acr_password }}"
+#    - name: Login to Azure Container Registry
+#      containers.podman.podman_login:
+#        registry: acrcp2denisse.azurecr.io
+#        username: acrcp2denisse
+#        password: "{{ acr_password }}"
 
     - name: Run nginx container
       containers.podman.podman_container:
